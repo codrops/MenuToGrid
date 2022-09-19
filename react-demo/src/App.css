@@ -1,0 +1,408 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 14px;
+  --color-text: #131313;
+  --color-bg: #fff;
+  --color-link: #000;
+  --color-link-hover: #131313;
+  --padding-sides: 2rem;
+  --padding-row: 1rem;
+  --color-row-border: #f0f0f0;
+  --color-bg-row-hover: #f0f0f0;
+  --color-text-alt: #000;
+  --image-gap: 1vw;
+  --image-gap-large: 2vw;
+  --img-size: 5vw;
+  --img-size-large: 14vw;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  font-family: auger-mono, monospace;
+  font-weight: 300;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.oh {
+  position: relative;
+  overflow: hidden;
+}
+
+.oh__inner {
+  will-change: transform;
+  display: inline-block;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+  content: '';
+  position: fixed;
+  z-index: 1000;
+}
+
+.js .loading::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.js .loading::after {
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  opacity: 0.4;
+  background: var(--color-link);
+  animation: loaderAnim 0.7s linear infinite alternate forwards;
+}
+
+@keyframes loaderAnim {
+  to {
+    opacity: 1;
+    transform: scale3d(0.5, 0.5, 1);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-link);
+  outline: none;
+  cursor: pointer;
+}
+
+.hover-line {
+  overflow: hidden;
+  position: relative;
+}
+
+.hover-line::before {
+  content: '';
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  position: absolute;
+  top: 92%;
+  transition: transform 0.3s;
+  transform-origin: 0% 50%;
+}
+
+.hover-line:hover::before {
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--color-link-hover);
+  outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+  /* Provide a fallback style for browsers
+   that don't support :focus-visible */
+  outline: none;
+  background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+  /* Remove the focus indicator on mouse-focus for browsers
+   that do support :focus-visible */
+  background: transparent;
+}
+
+a:focus-visible {
+  /* Draw a very noticeable focus style for
+   keyboard-focus on browsers that do support
+   :focus-visible */
+  outline: 2px solid red;
+  background: transparent;
+}
+
+.unbutton {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.unbutton:focus {
+  outline: none;
+}
+
+.frame {
+  width: 100%;
+  padding: 3rem var(--padding-sides);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'title' 'prevdemo' 'sponsor';
+  justify-content: start;
+  grid-row-gap: 1rem;
+  align-items: end;
+  justify-items: start;
+}
+
+.frame__title {
+  grid-area: title;
+  display: flex;
+  line-height: 1;
+}
+
+.frame__title-main {
+  font-size: 1.953rem;
+  margin: 0;
+  font-weight: 400;
+  font-family: neue-haas-grotesk-display, sans-serif;
+  text-transform: none;
+}
+
+.frame__title-back {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.frame__title-back span {
+  display: none;
+}
+
+.frame__title-back svg {
+  fill: currentColor;
+}
+
+.frame__prevdemo {
+  grid-area: prevdemo;
+}
+
+.intro {
+  padding: 1rem var(--padding-sides) 3rem;
+}
+
+.intro p {
+  max-width: 860px;
+}
+
+.cover {
+  background: var(--color-bg-row-hover);
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  position: fixed;
+  left: 0;
+  will-change: height, top;
+}
+
+.content {
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-row-border);
+}
+
+.row {
+  z-index: 1;
+  /*color: var(--color-text);*/
+  display: grid;
+  /*position: relative;*/
+  cursor: pointer;
+  /*grid-template-rows: var(--img-size);*/
+  grid-template-columns: auto 1fr;
+  gap: 5vw;
+  align-items: center;
+  padding: var(--padding-row) var(--padding-sides);
+  border-top: 1px solid var(--color-row-border);
+  transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
+}
+
+.row:hover {
+  background-color: var(--color-bg-row-hover);
+}
+
+.row--current {
+  z-index: 11;
+  transition: border-color 0.3s ease-out;
+}
+
+.cell {
+  position: relative;
+}
+
+.cell__title,
+.preview__item-title {
+  margin: 0;
+  font-size: clamp(1.953rem, 4vw, 3.052rem);
+  position: relative;
+  font-weight: 400;
+  line-height: 1;
+  font-family: neue-haas-grotesk-display, sans-serif;
+  white-space: nowrap;
+}
+
+.cell__title--switch {
+  font-family: lores-22-serif, sans-serif;
+  font-weight: 700;
+}
+
+.cell__title {
+  display: grid;
+  grid-template-rows: 100% 100%;
+}
+
+.cell--images {
+  display: grid;
+  align-content: center;
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  grid-gap: var(--image-gap);
+  justify-content: end;
+  margin-left: auto;
+}
+
+.cell__img {
+  width: var(--img-size);
+  display: grid;
+  position: relative;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.cell__img-inner {
+  background-size: cover;
+  background-position: 50% 50%;
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: calc(var(--image-gap) / 3);
+}
+
+.cell__img-title {
+  max-width: 100%;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-text-alt);
+  margin: 0;
+  height: 0;
+  opacity: 0;
+  white-space: nowrap;
+  will-change: opacity, transform;
+
+  display: none;
+}
+
+.page-footer {
+  padding: 10vw 10vw 5vw;
+}
+
+.page-footer__text {
+  max-width: 860px;
+  margin: 1.5rem auto;
+  line-height: 1.5;
+}
+
+.page-footer__credits {
+  padding-top: 10vh;
+  text-align: center;
+}
+
+.preview {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.preview__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  font-family: sans-serif;
+}
+
+.preview__close--show {
+  pointer-events: auto;
+}
+
+.preview__item {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  grid-gap: 10vh;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.preview__item--current {
+  pointer-events: auto;
+  height: 100vh;
+  opacity: 1;
+}
+
+.preview__item-title {
+  font-family: lores-22-serif, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.563rem, 6vw, 3.815rem);
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  max-width: 1200px;
+  width: 100%;
+  grid-gap: var(--image-gap-large);
+  justify-content: center;
+  justify-items: center;
+  --img-size: var(--img-size-large);
+  grid-template-columns: repeat(4, var(--img-size));
+  grid-template-rows: repeat(2, var(--img-size));
+}
+
+.grid .cell__img {
+  width: var(--img-size-large);
+}
+
+@media screen and (min-width: 61em) {
+  .frame {
+    grid-template-rows: auto;
+    grid-template-areas: 'title prevdemo sponsor';
+    grid-template-columns: auto auto 1fr;
+    grid-column-gap: 2rem;
+  }
+  :root {
+    --padding-sides: 4rem;
+    --padding-row: 2rem;
+  }
+}
