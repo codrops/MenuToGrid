@@ -1,8 +1,8 @@
 {
-  "name": "expandinggriditems",
+  "name": "menutogrid",
   "version": "1.0.0",
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "description": "",
+  "description": "A simple layout animation where the thumbnails of a menu row animate to their position in a content preview grid using GSAP's Flip plugin.",
   "scripts": {
     "start": "parcel src/index.html --open",
     "clean": "rm -rf dist/*",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/codrops/[NAME].git"
+    "url": "git://github.com/codrops/MenuToGrid.git"
   },
   "keywords": [],
   "author": "Codrops",
   "license": "MIT",
   "homepage": "https://tympanus.net/codrops",
   "bugs": {
-    "url": "https://github.com/codrops/[NAME]/issues"
+    "url": "https://github.com/codrops/MenuToGrid/issues"
   },
   "devDependencies": {
     "parcel": "^2.7.0"
