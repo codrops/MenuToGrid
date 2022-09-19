@@ -87,12 +87,14 @@ a {
 	cursor: pointer;
 }
 
-.hover-line {
+.hover-line,
+.cda-sponsor-link {
 	overflow: hidden;
 	position: relative;
 }
 
-.hover-line::before {
+.hover-line::before,
+.cda-sponsor-link::before {
 	content: '';
 	height: 1px;
 	width: 100%;
@@ -103,7 +105,8 @@ a {
 	transform-origin: 0% 50%;
 }
 
-.hover-line:hover::before {
+.hover-line:hover::before,
+.cda-sponsor-link:hover::before {
 	transform: scaleX(0);
 	transform-origin: 100% 50%;
 }
@@ -150,6 +153,7 @@ a:focus-visible {
 }
 
 .frame {
+	width: 100%;
 	padding: 3rem var(--padding-sides);
 	display: grid;
 	grid-template-columns: 1fr;
@@ -398,7 +402,7 @@ a:focus-visible {
 	.frame {
 		grid-template-rows: auto;
 		grid-template-areas: 'title prevdemo sponsor';
-		grid-template-columns: auto auto auto;
+		grid-template-columns: auto auto 1fr;
 		grid-column-gap: 2rem;
 	}
 	:root {
